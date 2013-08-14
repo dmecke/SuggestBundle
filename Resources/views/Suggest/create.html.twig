@@ -1,0 +1,18 @@
+{% extends 'CunningsoftSuggestBundle::layout.html.twig' %}
+
+{% block cunningsoft_suggest_content %}
+<h2>{{ 'create_new_suggestion'|trans({}, 'CunningsoftSuggestBundle') }}</h2>
+<form method="post" action="{{ path('cunningsoft_suggest_create') }}" class="form_create">
+    <div class="title">
+        <div><label for="cunningsoft_suggest_title">{{ 'title'|trans({}, 'CunningsoftSuggestBundle') }}</label></div>
+        <div><input type="text" name="title" id="cunningsoft_suggest_title" /></div>
+    </div>
+    <div class="description">
+        <div><label for="cunningsoft_suggest_description">{{ 'description'|trans({}, 'CunningsoftSuggestBundle') }}</label></div>
+        <div><textarea name="description" id="cunningsoft_suggest_description"></textarea></div>
+    </div>
+    <div>
+        <input type="submit" value="{{ 'create'|trans({}, 'CunningsoftSuggestBundle') }}" class="btn" />
+    </div>
+</form>
+{% endblock %}

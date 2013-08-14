@@ -1,0 +1,33 @@
+{
+    "name": "cunningsoft/suggest-bundle",
+    "type": "symfony-bundle",
+    "description": "A bundle for Symfony2 to collect ideas and suggestions from the community and let them vote",
+    "keywords": ["suggestions", "ideas", "vote", "community"],
+    "homepage": "https://github.com/dmecke/SuggestBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Mecke",
+            "homepage": "https://github.com/dmecke"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/dmecke/SuggestBundle/contributors"
+        }
+    ],
+    "require": {
+        "symfony/symfony": ">=2.2.0",
+        "doctrine/orm": ">=2.2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "autoload": {
+        "psr-0": {
+            "Cunningsoft\\SuggestBundle": ""
+        }
+    },
+    "target-dir": "Cunningsoft/SuggestBundle"
+}

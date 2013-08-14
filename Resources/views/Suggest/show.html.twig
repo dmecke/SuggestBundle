@@ -1,0 +1,36 @@
+{% extends 'CunningsoftSuggestBundle::layout.html.twig' %}
+
+{% block cunningsoft_suggest_content %}
+<h2>{{ suggestion.title }} <span class="by">{{ 'by'|trans({ '%username%': suggestion.author }, 'CunningsoftSuggestBundle') }}</span><span class="votes_overall">, {{ 'votes'|trans({ '%votes%': suggestion.votesOverall }, 'CunningsoftSuggestBundle') }}</span></h2>
+<form method="post" action="{{ path('cunningsoft_suggest_vote', { 'id': suggestion.id } ) }}">
+    <ul>
+        <li><input type="radio" name="votes" value="0" id="cunningsoft_suggest_vote0"{% if suggestion.votesByAuthor(currentUser) == 0 %} checked="checked"{% endif %} /> <label for="cunningsoft_suggest_vote0">{{ 'votes'|trans({ '%votes%': 0 }, 'CunningsoftSuggestBundle') }}</label></li>
+        <li><input type="radio" name="votes" value="1" id="cunningsoft_suggest_vote1"{% if suggestion.votesByAuthor(currentUser) == 1 %} checked="checked"{% elseif suggestion.votesByAuthor(currentUser) < 1 and votesLeft < 1 %} disabled="disabled"{% endif %} /> <label for="cunningsoft_suggest_vote1">{{ 'votes'|trans({ '%votes%': 1 }, 'CunningsoftSuggestBundle') }}</label></li>
+        <li><input type="radio" name="votes" value="2" id="cunningsoft_suggest_vote2"{% if suggestion.votesByAuthor(currentUser) == 2 %} checked="checked"{% elseif suggestion.votesByAuthor(currentUser) < 2 and votesLeft < 2 %} disabled="disabled"{% endif %} /> <label for="cunningsoft_suggest_vote2">{{ 'votes'|trans({ '%votes%': 2 }, 'CunningsoftSuggestBundle') }}</label></li>
+        <li><input type="radio" name="votes" value="3" id="cunningsoft_suggest_vote3"{% if suggestion.votesByAuthor(currentUser) == 3 %} checked="checked"{% elseif suggestion.votesByAuthor(currentUser) < 3 and votesLeft < 3 %} disabled="disabled"{% endif %} /> <label for="cunningsoft_suggest_vote3">{{ 'votes'|trans({ '%votes%': 3 }, 'CunningsoftSuggestBundle') }}</label></li>
+    </ul>
+    <input type="submit" value="{{ 'do_vote'|trans({}, 'CunningsoftSuggestBundle') }}" class="btn" />
+</form>
+<p>{{ suggestion.description }}</p>
+
+<h3>{{ 'comments'|trans({}, 'CunningsoftSuggestBundle') }}</h3>
+<ul>
+    {% for comment in suggestion.comments %}
+    <li>
+        <div><b>{{ comment.author }}</b></div>
+        <p>{{ comment.message }}</p>
+    </li>
+    {% endfor %}
+    <li>
+        <form method="post" action="{{ path('cunningsoft_suggest_comment', { 'id': suggestion.id } ) }}" class="form_comment">
+            <div>
+                <div><label for="cunningsoft_suggest_comment">{{ 'comment'|trans({}, 'CunningsoftSuggestBundle') }}</label></div>
+                <div><textarea name="comment" id="cunningsoft_suggest_comment"></textarea></div>
+            </div>
+            <div>
+                <input type="submit" value="{{ 'do_comment'|trans({}, 'CunningsoftSuggestBundle') }}" class="btn" />
+            </div>
+        </form>
+    </li>
+</ul>
+{% endblock %}

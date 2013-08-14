@@ -1,0 +1,13 @@
+suggestions:            Suggestions
+overview:               Overview
+create_new_suggestion:  Create new suggestion
+create:                 Create
+title:                  Title
+description:            Description
+by:                     by %username%
+comments:               Comments
+comment:                Comment
+do_comment:             comment
+do_vote:                vote
+votes:                  %votes% votes
+own_votes:              %votes% own votes

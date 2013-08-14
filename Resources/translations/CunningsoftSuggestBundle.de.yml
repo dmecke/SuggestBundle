@@ -1,0 +1,13 @@
+suggestions:            Ideen & Vorschläge
+overview:               Übersicht
+create_new_suggestion:  Neuen Vorschlag einreichen
+create:                 Einreichen
+title:                  Titel
+description:            Beschreibung
+by:                     von %username%
+comments:               Kommentare
+comment:                Kommentar
+do_comment:             kommentieren
+do_vote:                abstimmen
+votes:                  %votes% Stimmen
+own_votes:              %votes% eigene Stimmen
