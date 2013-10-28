@@ -1,7 +1,8 @@
 {% extends 'CunningsoftSuggestBundle::layout.html.twig' %}
 
 {% block cunningsoft_suggest_content %}
-<h2>{{ suggestion.title }} <span class="by">{{ 'by'|trans({ '%username%': suggestion.author }, 'CunningsoftSuggestBundle') }}</span><span class="votes_overall">, {{ 'votes'|trans({ '%votes%': suggestion.votesOverall }, 'CunningsoftSuggestBundle') }}</span></h2>
+<h2>{{ suggestion.title }} <span class="by">{{ 'by'|trans({ '%username%': suggestion.author }, 'CunningsoftSuggestBundle') }}</span>{% if not suggestion.isDone %}<span class="votes_overall">, {{ 'votes'|trans({ '%votes%': suggestion.votesOverall }, 'CunningsoftSuggestBundle') }}</span>{% endif %}</h2>
+{% if not suggestion.isDone %}
 <form method="post" action="{{ path('cunningsoft_suggest_vote', { 'id': suggestion.id } ) }}">
     <ul>
         <li><input type="radio" name="votes" value="0" id="cunningsoft_suggest_vote0"{% if suggestion.votesByAuthor(currentUser) == 0 %} checked="checked"{% endif %} /> <label for="cunningsoft_suggest_vote0">{{ 'votes'|trans({ '%votes%': 0 }, 'CunningsoftSuggestBundle') }}</label></li>
@@ -11,6 +12,7 @@
     </ul>
     <input type="submit" value="{{ 'do_vote'|trans({}, 'CunningsoftSuggestBundle') }}" class="btn" />
 </form>
+{% endif %}
 <p>{{ suggestion.description }}</p>
 
 <h3>{{ 'comments'|trans({}, 'CunningsoftSuggestBundle') }}</h3>
@@ -21,6 +23,7 @@
         <p>{{ comment.message }}</p>
     </li>
     {% endfor %}
+    {% if not suggestion.isDone %}
     <li>
         <form method="post" action="{{ path('cunningsoft_suggest_comment', { 'id': suggestion.id } ) }}" class="form_comment">
             <div>
@@ -32,5 +35,6 @@
             </div>
         </form>
     </li>
+    {% endif %}
 </ul>
 {% endblock %}

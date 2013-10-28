@@ -55,6 +55,13 @@ class Suggestion
     private $votes;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $isDone = false;
+
+    /**
      * @return int
      */
     public function getId()
@@ -145,5 +152,13 @@ class Suggestion
         }
 
         return 0;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDone()
+    {
+        return $this->isDone;
     }
 }

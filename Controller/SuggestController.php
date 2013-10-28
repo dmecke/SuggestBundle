@@ -25,16 +25,20 @@ class SuggestController extends BaseController
      */
     public function listAction()
     {
-        /** @var Suggestion[] $list */
-        $list = $this->get('doctrine.orm.entity_manager')->getRepository('CunningsoftSuggestBundle:Suggestion')->findAll();
+        /** @var Suggestion[] $open */
+        $open = $this->get('doctrine.orm.entity_manager')->getRepository('CunningsoftSuggestBundle:Suggestion')->findBy(array('isDone' => false));
         $votes = array();
-        foreach ($list as $k => $suggestion) {
+        foreach ($open as $k => $suggestion) {
             $votes[$k] = $suggestion->getVotesOverall();
         }
-        array_multisort($votes, SORT_DESC, $list);
+        array_multisort($votes, SORT_DESC, $open);
+
+        /** @var Suggestion[] $open */
+        $done = $this->get('doctrine.orm.entity_manager')->getRepository('CunningsoftSuggestBundle:Suggestion')->findBy(array('isDone' => true));
 
         return array(
-            'list' => $list,
+            'open' => $open,
+            'done' => $done,
             'currentUser' => $this->getUser(),
         );
     }

@@ -3,9 +3,16 @@
 {% block cunningsoft_suggest_content %}
 <h2>{{ 'suggestions'|trans({}, 'CunningsoftSuggestBundle') }}</h2>
 <ul>
-    {% for suggestion in list %}
+    {% for suggestion in open %}
     <li><a href="{{ path('cunningsoft_suggest_show', { 'id': suggestion.id } ) }}">{{ suggestion.title }}</a> ({{ 'votes'|trans({ '%votes%': suggestion.votesOverall }, 'CunningsoftSuggestBundle') }}{% if suggestion.votesByAuthor(currentUser) > 0 %}, {{ 'own_votes'|trans({ '%votes%': suggestion.votesByAuthor(currentUser) }, 'CunningsoftSuggestBundle') }}{% endif %})</li>
     {% endfor %}
 </ul>
 <a href="{{ path('cunningsoft_suggest_create') }}" class="btn">{{ 'create_new_suggestion'|trans({}, 'CunningsoftSuggestBundle') }}</a>
+
+<h2>{{ 'done_suggestions'|trans({}, 'CunningsoftSuggestBundle' ) }}</h2>
+<ul>
+    {% for suggestion in done %}
+    <li><a href="{{ path('cunningsoft_suggest_show', { 'id': suggestion.id } ) }}">{{ suggestion.title }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}
